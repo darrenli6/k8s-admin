@@ -45,15 +45,15 @@ func init() {
 
 	keyMap = make(map[KeyName]interface{})
 	keyMap[ServerName] = config.Server.Name
-	keyMap[ServerHost] = config.Server.Port
+	keyMap[ServerHost] = config.Server.Host
 	keyMap[ServerPort] = config.Server.Port
 
 }
 
-func GetString(KeyName KeyName) string {
-	return keyMap[KeyName].(string)
+func GetString(keyName KeyName) string {
+	return keyMap[keyName].(string)
 }
 
-func GetInt(KeyName KeyName) int {
-	return keyMap[KeyName].(int)
+func GetInt(keyName KeyName) int {
+	return keyMap[keyName].(int)
 }
