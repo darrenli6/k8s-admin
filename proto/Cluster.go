@@ -142,25 +142,25 @@ func isAvailable(file multipart.File) (*rest.Config, error) {
 
 	config, err := clientcmd.NewClientConfigFromBytes(buf.Bytes())
 	if err != nil {
-		fmt.Println("NewClientConfigFromBytes" + err)
+		klog.Fatal("NewClientConfigFromBytes" + err.Error())
 		return nil, err
 	}
 
 	clientConfig, err := config.ClientConfig()
 	if err != nil {
-		fmt.Println("ClientConfig" + err)
+		klog.Fatal("ClientConfig" + err.Error())
 		return nil, err
 	}
 	clientSet, err := kubernetes.NewForConfig(clientConfig)
 
 	if err != nil {
-		fmt.Println("NewForConfig" + err)
+		klog.Fatal("NewForConfig" + err.Error())
 		return nil, err
 	}
 	_, err = clientSet.ServerVersion()
 
 	if err != nil {
-		fmt.Println("ServerVersion" + err)
+		klog.Fatal("ServerVersion" + err.Error())
 		return nil, err
 	}
 	return clientConfig, nil
