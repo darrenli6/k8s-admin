@@ -24,8 +24,8 @@ func Nodes(c *gin.Context) {
 
 func ExtraClusterInfo(c *gin.Context) {
 
-	clusterName :=c.Param("clusterName")
-	extraClusterInfo :=service.ExtraClusterInfo(clusterName)
-	c.JSON(http.StatusOK,(&proto.Result).Ok(200,extraClusterInfo,"查询成功")
-)
+	clusterName := c.Param("clusterName")
+	extraClusterInfo := service.ExtraClusterInfo(clusterName)
+	c.JSON(http.StatusOK, (&proto.Result{}).Ok(200, extraClusterInfo, "查询成功"))
+
 }

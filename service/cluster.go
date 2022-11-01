@@ -109,7 +109,7 @@ func ExtraClusterInfo(clusterName string) proto.ExtraClusterInfo {
 		extraClusterInfo.TotalMemory += memory
 
 	}
-	podList, _ := clientSet.CoreV1().Pods("")
+	podList, _ := clientSet.CoreV1().Pods("").List(ctx, metav1.ListOptions{})
 
 	return nil
 }
