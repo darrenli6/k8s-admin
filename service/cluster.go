@@ -25,7 +25,7 @@ func GetCluster(name string) (proto.Cluster, error) {
 	return defaultClusterStore.Get(name)
 }
 
-func GetClusters(store proto.DefaultClusterStore) []proto.Cluster {
+func getClusters(store proto.DefaultClusterStore) []proto.Cluster {
 	return store.List()
 }
 
@@ -111,7 +111,17 @@ func ExtraClusterInfo(clusterName string) proto.ExtraClusterInfo {
 	}
 	podList, _ := clientSet.CoreV1().Pods("").List(ctx, metav1.ListOptions{})
 
-	return nil
+	pods := podList.Items
+
+	for i := range pods {
+		for j := range pods[i].Spec.Containers {
+			cpu := pods[i].Spec.Containers[j].Resources.Requests.Cpu().AsApproximateFloat64()
+			extraClusterInfo.UsedCpu += cpu
+			memory := pods[i].Spec.Containers[j].Resources.Requests.Memory().AsApproximateFloat64()
+			extraClusterInfo.UsedMemory += memory
+		}
+	}
+	return extraClusterInfo
 }
 
 func Version(clusterName string) (*version.Info, error) {
@@ -125,4 +135,10 @@ func Version(clusterName string) (*version.Info, error) {
 		return nil, err
 	}
 	return version, nil
+}
+
+func GetClusters() []proto.Cluster {
+
+	defaultClusterStore := proto.DefaultClusterStore{}
+	return getClusters(defaultClusterStore)
 }

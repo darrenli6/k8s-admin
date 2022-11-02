@@ -29,3 +29,9 @@ func ExtraClusterInfo(c *gin.Context) {
 	c.JSON(http.StatusOK, (&proto.Result{}).Ok(200, extraClusterInfo, "查询成功"))
 
 }
+
+func GetClusters(c *gin.Context) {
+
+	clusters := service.GetClusters()
+	c.JSON(http.StatusOK, (&proto.Result{}).Ok(200, clusters, "查询集群成功"))
+}

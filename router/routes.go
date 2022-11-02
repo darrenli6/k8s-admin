@@ -11,5 +11,6 @@ func CollectRoute(engine *gin.Engine) {
 	clusterGroup := engine.Group("/cluster")
 	clusterGroup.GET("/version/:clusterName", apis.Version)
 	clusterGroup.GET("/nodes/:clusterName", apis.Nodes)
-
+	clusterGroup.GET("/extra/info/:clusterName", apis.ExtraClusterInfo)
+	clusterGroup.GET("/list", apis.GetClusters)
 }
