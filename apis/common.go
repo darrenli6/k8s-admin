@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"sigs.k8s.io/yaml"
+	"gopkg.in/yaml.v3"
 
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )
@@ -29,14 +29,26 @@ func ApplyYaml(c *gin.Context) {
 
 func getYamlData(c *gin.Context) (*unstructured.Unstructured, error) {
 
-	var body map[string][]byte
-	if err := c.ShouldBind(&body); err != nil {
-		return nil, err
-	}
+	//var body map[string][]byte
+	//if err := c.ShouldBind(&body); err != nil {
+	//	return nil, err
+	//}
 	var u *unstructured.Unstructured
-	if err := yaml.Unmarshal(body["data"], &u); err != nil {
+	str1 := `apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.14.2
+      ports:
+        - containerPort: 80`
+	resultMap := make(map[string]interface{})
+	if err := yaml.Unmarshal([]byte(str1), &resultMap); err != nil {
 		return nil, err
 	}
+	u.Object = resultMap
 
 	delete(u.Object["metadata"].(map[string]interface{}), "manageFields")
 

@@ -10,7 +10,7 @@ import (
 	"k8s.io/klog"
 )
 
-func main1() {
+func main() {
 
 	engine := gin.Default()
 

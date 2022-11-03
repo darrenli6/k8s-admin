@@ -15,7 +15,7 @@ const (
 	SR_File_Max_Bytes = 1024 * 1024 * 2
 )
 
-func main() {
+func main1() {
 	router := gin.Default()
 	//本地上传到服务器 csv格式，其他类似 读取内容
 	router.GET("/upload", uploadFile)
