@@ -8,6 +8,9 @@ import (
 
 func CollectRoute(engine *gin.Engine) {
 
+	commonGroup := engine.Group("/common")
+	commonGroup.GET("/apply/:clusterName", apis.ApplyYaml)
+
 	clusterGroup := engine.Group("/cluster")
 	clusterGroup.GET("/version/:clusterName", apis.Version)
 	clusterGroup.GET("/nodes/:clusterName", apis.Nodes)

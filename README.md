@@ -2,32 +2,17 @@
 # k8s 后台
 
 
-# API 
 
-## /k8s-admin
-```text
-暂无描述
-```
-#### 公共Header参数
-参数名 | 示例值 | 参数描述
---- | --- | ---
-暂无参数
-#### 公共Query参数
-参数名 | 示例值 | 参数描述
---- | --- | ---
-暂无参数
-#### 公共Body参数
-参数名 | 示例值 | 参数描述
---- | --- | ---
-暂无参数
-#### 预执行脚本
-```javascript
-暂无预执行脚本
-```
-#### 后执行脚本
-```javascript
-暂无后执行脚本
-```
+
+# API 接口
+
+## 导出工具
+
+参考 https://github.com/thedevsaddam/docgen
+
+md build -i k8s.postman_collection.json -o k8s.md -m 
+
+
 ## /k8s-admin/1.clust list
 ```text
 暂无描述
