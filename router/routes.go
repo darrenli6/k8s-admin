@@ -19,4 +19,8 @@ func CollectRoute(engine *gin.Engine) {
 
 	namespaceGroup := engine.Group("namespace")
 	namespaceGroup.GET("/get/:clusterName", apis.GetNamespaces)
+	namespaceGroup.POST("/create/:clusterName", apis.CreateNamespace)
+	namespaceGroup.POST("/delete/:clusterName/:name", apis.DeleteNamespace)
+	namespaceGroup.POST("/update/:clusterName", apis.UpdateNamespace)
+
 }
