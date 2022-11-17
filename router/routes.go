@@ -23,4 +23,7 @@ func CollectRoute(engine *gin.Engine) {
 	namespaceGroup.POST("/delete/:clusterName/:name", apis.DeleteNamespace)
 	namespaceGroup.POST("/update/:clusterName", apis.UpdateNamespace)
 
+	// pod
+	podGroup := engine.Group("/pod")
+	podGroup.GET("/list/:clusterName", apis.GetAllPods)
 }
